@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  traefik:
+    image: traefik # The official Traefik docker image
+    restart: always
+    command: --api --docker --logLevel=DEBUG # Enables the web UI and tells Træfik to listen to docker
+    ports:
+      - "80:80"     # Listen on the HTTP port
+      - "8080:8080" # web admin
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - ./traefik.toml:/traefik.toml
+    container_name: traefik
+
+networks:
+  default:
+    external:
+      name: thenetwork
