@@ -1,10 +1,32 @@
 debug = true
 
-defaultEntryPoints = ["http"]
+logLevel = "ERROR"
 
-[web]
-address = ":8080"
+defaultEntryPoints = ["http", "https"]
 
 [entryPoints]
   [entryPoints.http]
   address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+[retry]
+
+[acme]
+email = "scholars.lab@gmail.com"
+storage = "acme.json"
+onHostRule = true
+caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+entrypoint = "https"
+  [acme.httpChallenge]
+  entrypoint = "http"
+
+[[acme.domains]]
+main = "womensbios.lib.virginia.edu"
+
+[web]
+address = ":8080"
+
