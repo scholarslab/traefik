@@ -237,5 +237,6 @@ Now just start the container and Traefik handles the domain routing (and for pro
 The final thing to do for development is to change your /etc/hosts file to redirect the domain name to your local machine.
 - edit the `/etc/hosts` file with Vim or your favorite editor (requires root priviliges), and add a line like so to the bottom of the file:
   - `127.0.0.1 cnhi-milio.nursing.virginia.edu`
+- Windows see here: [https://gist.github.com/zenorocha/18b10a14b2deb214dc4ce43a2d2e2992 ](https://gist.github.com/zenorocha/18b10a14b2deb214dc4ce43a2d2e2992)
 
 This will make your computer think that the domain name points to your local machine, and then your local machine will use Traefik to route traffic to the Docker container you just set up.
