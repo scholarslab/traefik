@@ -2,17 +2,17 @@ version: '2'
 
 services:
   traefik:
-    image: traefik:1.6
+    image: traefik:1.7
     restart: always
     command: --api --docker --logLevel=DEBUG
     ports:
       - "80:80"
-      - "8080:8080"
       - "443:443"
+      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # Use the correct file for development or production
-      - ./local.traefik.toml:/traefik.toml
+      - ./ssl.traefik.toml:/traefik.toml
       - ./acme.json:/acme.json
     container_name: traefik
 

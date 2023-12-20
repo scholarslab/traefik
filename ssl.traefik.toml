@@ -1,9 +1,13 @@
 debug = true
-
-logLevel = "ERROR"
+logLevel = "ERROR" # DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+InsecureSkipVerify = true 
 
 defaultEntryPoints = ["http", "https"]
 
+[web]
+address = ":8080"
+
+# Force https
 [entryPoints]
   [entryPoints.http]
   address = ":80"
@@ -11,22 +15,24 @@ defaultEntryPoints = ["http", "https"]
     entryPoint = "https"
   [entryPoints.https]
   address = ":443"
-  [entryPoints.https.tls]
+    [entryPoints.https.tls]
 
 [retry]
 
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "beagle.lib.virginia.edu"
+watch = true
+# This will hide all docker containers that don't have explicitly set label to "enable"
+exposedbydefault = false
+
 [acme]
 email = "scholars.lab@gmail.com"
-storage = "acme.json"
+storageFile = "acme.json"
+acmeLogging = true
+onDemand = false
 onHostRule = true
-caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
-entrypoint = "https"
+entryPoint = "https"
   [acme.httpChallenge]
-  entrypoint = "http"
-
-[[acme.domains]]
-main = "womensbios.lib.virginia.edu"
-
-[web]
-address = ":8080"
+  entryPoint = "http"
 
