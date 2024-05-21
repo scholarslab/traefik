@@ -4,9 +4,6 @@ InsecureSkipVerify = true
 
 defaultEntryPoints = ["http", "https"]
 
-[web]
-address = ":8080"
-
 # Force https
 [entryPoints]
   [entryPoints.http]
@@ -15,7 +12,7 @@ address = ":8080"
     entryPoint = "https"
   [entryPoints.https]
   address = ":443"
-    [entryPoints.https.tls]
+  [entryPoints.https.tls]
 
 [retry]
 
@@ -28,9 +25,10 @@ exposedbydefault = false
 
 [acme]
 email = "scholars.lab@gmail.com"
-storageFile = "acme.json"
+storage = "acme.json"
+caserver = "https://acme-v02.api.letsencrypt.org/directory"
 acmeLogging = true
-onDemand = false
+onDemand = true
 onHostRule = true
 entryPoint = "https"
   [acme.httpChallenge]
